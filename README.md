@@ -5,7 +5,7 @@ This project refactors the Contact Book app by integrating state management with
 
 ## 🛠 Tools used
 
-[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,npm,webpack,vscode)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,redux,npm,webpack,vscode)](https://skillicons.dev)
 
 ### Description 
 
