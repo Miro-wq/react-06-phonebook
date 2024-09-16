@@ -3,14 +3,7 @@ import { nanoid } from 'nanoid';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
-
 import './App.module.css';
-
-// class App extends Component {
-//   state = {
-//     contacts: [],
-//     filter: '',
-//   }
 
 const App = () => {
   const [contacts, setContacts] = useState(() => {
@@ -23,19 +16,6 @@ const [filter, setFilter] = useState('');
 useEffect(() => {
   localStorage.setItem('contacts', JSON.stringify(contacts));
 }, [contacts]);
-
-
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-  //   if (contacts) {
-  //     this.setState({ contacts: JSON.parse(contacts) });
-  //   }
-  // }
-  // componentDidUpdate(prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
 
   const addContact = (name, number) => {
     const isDuplicate = contacts.some(
@@ -83,20 +63,3 @@ useEffect(() => {
   };
 
 export default App;
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101'
-//       }}
-//     >
-//       React homework template
-//     </div>
-//   );
-// };
