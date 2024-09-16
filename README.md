@@ -1,112 +1,154 @@
-# React homework template
+# Contact book, part 2
 
-Цей проект був створений за допомогою
-[Create React App](https://github.com/facebook/create-react-app). Для знайомства
-і налаштування додаткових можливостей
-[звернися до документації](https://facebook.github.io/create-react-app/docs/getting-started).
+Added storing phonebook contacts in localStorage. Component life cycle methods used.
 
-## Створення репозиторію за шаблоном
+## 🛠 Tools used
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення репозиторію
-свого проєкта. Для цього натисни на кнопку `«Use this template»` і вибери опцію
-`«Create a new repository»`, як показано на зображенні.
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,npm,webpack,vscode)](https://skillicons.dev)
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+### Description 
 
-На наступному кроці відкриється сторінка створення нового репозиторію. Заповни поле
-його імені, переконайся що репозиторій публічний, після чого натисни кнопку
-`«Create repository from template»`.
+This homework task is a simple contact management application for a phonebook, designed to practice fundamental React concepts and state management. The application allows users to add, display, search, and delete contacts, with each contact consisting of a name and a phone number. The project is structured to progressively introduce new features, demonstrating the importance of component-based architecture, controlled components, and state handling in React.
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+### Key Features 
 
-Після того як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як
-показано на зображенні.
+1. **Add Contacts**: Users can add contacts with a name and phone number. The application ensures that contact names adhere to a specific pattern and prevents the addition of duplicate names.
+  
+2. **Search and Filter**: A search field is provided to filter contacts by name, with case-insensitive matching.
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+3. **Contact List Management**: Users can view a list of all contacts and remove any contact they no longer need.
 
-Проскроливши сторінку до самого кінця, у секції `«Workflow permissions»` вибери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це
-необхідно для автоматизації процесу деплою проєкту.
+4. **Component Refactoring**: The application is refactored from a single component into multiple independent components, enhancing modularity and readability.
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+### Key Learning Objectives:
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів і папок
-репозиторію-шаблону. Далі працюй із ним як із будь-яким іншим особистим репозиторієм,
-клонуй його собі на комп'ютер, пиши код, роби комміти і відправляй їх на
-GitHub.
+- **State Management**: Manage and update state in React, particularly how to structure state to store multiple properties and handle user inputs in a controlled manner.
 
-## Підготовка до роботи
+- **Componentization**: The importance of breaking down an application into smaller, reusable components became evident. This approach not only simplifies development but also makes the codebase easier to maintain and scale.
 
-1. Переконайся що на комп'ютері встановлено LTS-версія Node.js.
-   [Завантаж і встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проєкту командою `npm install`.
-3. Запусти режим розробки, виконавши команду `npm start`.
-4. Перейди в браузері за адресою [http://localhost:3000](http://localhost:3000).
-   Ця сторінка буде автоматично перезавантажуватися після збереження змін у файлах проєкту.
+- **Form Handling**: Experience in handling forms in React, including managing controlled inputs and validating user data through patterns and required fields.
 
-## Деплой
+- **Conditional Rendering**: Implementing conditional logic to prevent duplicate contacts from being added, which reinforced the concept of controlling what gets rendered based on the application's state.
 
-Продакшн версія проєкту буде автоматично проходити лінтинг, збиратися і
-деплоїтися на GitHub Pages, у гілку `gh-pages`, щоразу, коли оновлюється
-гілка `main`. Наприклад, після прямого пушу або прийнятого пул-реквесту. Для цього
-необхідно у файлі `package.json` відредагувати поле `homepage`, замінивши
-`your_username` і `your_repo_name` на свої, і відправити зміни на GitHub.
+- **Refactoring and Code Organization**: Refactoring the application into separate components taught me the significance of organizing code in a way that promotes reusability and separation of concerns.
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
+- **User Experience Considerations**: Enhancing the user experience by providing feedback (such as alerts) and ensuring the interface remains responsive and intuitive.
+
+This project served as a solid foundation for building more complex React applications, emphasizing the core principles of React and good development practices.
+
+---
+
+### Step 1
+The application should include a form and a contact list. In the current step, implement the ability to add a contact name and display it in the contact list. The application does not need to save contacts between different sessions (page refreshes).
+
+Use the markup below (input) for the contact name:
+
+```html
+<input
+  type="text"
+  name="name"
+  pattern="^[a-zA-Z]+(([' -][a-zA-Z ])?[a-zA-Z]*)*$"
+  title="Name may contain only letters, apostrophe, dash and spaces. For example, Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+  required
+/>
 ```
 
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) і
-виставити роздачу продакшн-версії файлів із папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
+The state stored in the parent component `<App>` should have the following structure, and adding new properties is not allowed:
 
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Статус деплоя
-
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
-
-- **Жовтий колір** - виконується збірка і деплой проєкту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, сборки або деплою сталася помилка.
-
-Детальнішу інформацію про статус можна подивитися, клікнувши на іконку, і
-у вікні, що випадає, перейти за посиланням `Details`.
-
-![Deployment status](./assets/deploy-status.png)
-
-### Жива сторінка
-
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися
-за адресою, вказаною у відредагованій властивості `homepage`. Наприклад, ось
-посилання на живу версію для цього репозиторію
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
-
-Якщо відкривається порожня сторінка, переконайся, що у вкладці `Console` немає помилок
-пов'язаних із неправильними шляхами до CSS і JS файлів проєкту (**404**). Швидше 
-за все у тебе неправильне значення властивості `homepage` у файлі `package.json`.
-
-### Маршрутизація
-
-Якщо додаток використовує бібліотеку `react-router-dom` для маршрутизації,
-необхідно додатково налаштувати компонент `<BrowserRouter>`, передавши у пропе
-`basename` точну назву твого репозиторію. Слеш на початку рядка обов'язковий.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
+```javascript
+state = {
+  contacts: [],
+  name: ''
+}
 ```
 
-## Як це працює
+Each contact should be an object with the properties `name` and `id`. To generate IDs, use any package intended for this task, such as nanoid.
 
-![How it works](./assets/how-it-works.png)
+### Step 2
+Extend the application's functionality by allowing users to add phone numbers. To do this, add `<input type="tel">` to the form and a property to store the value in the state.
 
-1. Після кожного пушу в гілку `main` GitHub-репозиторія, запускається спеціальний
-   скрипт (GitHub Action) з файла `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується і
-   проходить лінтинг і збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн-версія файлів проєкту
-   відправляється в гілку `gh-pages`. В іншому випадку, в лозі виконання
-   скрипта буде вказано в чому проблема.
+```javascript
+state = {
+  contacts: [],
+  name: '',
+  number: ''
+}
+```
+
+Use the markup below (input) for the contact number.
+
+```html
+<input
+  type="tel"
+  name="number"
+  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+  required
+/>
+```
+
+### Step 3
+Add a search field that can be used to filter the contact list by name.
+
+The search field is an input whose value is saved in the state (controlled element).
+The filtering logic should be case-insensitive.
+
+```javascript
+state = {
+  contacts: [],
+  filter: '',
+  name: '',
+  number: ''
+}
+```
+
+When working on a new feature, it is often useful to store data directly in the state. This eliminates the need to manually enter data into the interface to test the new functionality.
+
+For example, you can use the following initial state:
+
+```javascript
+state = {
+  contacts: [
+    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+  ],
+  filter: '',
+  name: '',
+  number: ''
+}
+```
+
+### Step 4
+If your application is implemented in a single `<App>` component, refactor the code to separate the parts of the application into different independent components.
+
+Only the `contacts` and `filter` properties will remain in the root `<App>` component's state.
+
+```javascript
+state = {
+  contacts: [],
+  filter: ''
+}
+```
+
+It is enough to highlight four components: the form for adding new contacts, the contact list, the contact list item, and the search filter.
+
+After refactoring, the root component of the application will look like this:
+
+```html
+<div>
+  <h1>Phonebook</h1>
+  <ContactForm ... />
+
+  <h2>Contacts</h2>
+  <Filter ... />
+  <ContactList ... />
+</div>
+```
+
+### Step 5
+Prevent the user from adding contacts whose names are already present in the phonebook. In case of an attempt to do so, display an alert with a warning.
+
+### Step 6
+Extend the application's functionality by allowing the user to delete previously saved contacts.
