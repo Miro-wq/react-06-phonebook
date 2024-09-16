@@ -1,6 +1,6 @@
 # Contact book, part 3, integrating state management with Redux Toolkit
 
-**Refactoring Contact Book Application**  
+## Refactoring Contact Book Application 
 This project refactors the Contact Book app by integrating state management with Redux Toolkit. It includes actions for saving, deleting contacts, and updating the filter. The app uses `redux-persist` to store the contacts in `localStorage` and connects React components with Redux using `react-redux`. The initial Redux state consists of an empty contacts array and a filter string.
 
 ## 🛠 Tools used
