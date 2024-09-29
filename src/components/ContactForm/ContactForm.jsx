@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import styles from './ContactForm.module.css';
+import styles from './ContactForm.module.css'
 
 const ContactForm = ({ onAddContact }) => {
   const [name, setName] = useState('');
@@ -23,8 +23,8 @@ const ContactForm = ({ onAddContact }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <label className={styles.label}>
         Name:
         <input
           type="text"
@@ -48,7 +48,7 @@ const ContactForm = ({ onAddContact }) => {
           onChange={handleChange}
         />
       </label>
-      <button type="submit">Add Contact</button>
+      <button type="submit" className={styles.addContact}>Add Contact</button>
     </form>
   );
 };
