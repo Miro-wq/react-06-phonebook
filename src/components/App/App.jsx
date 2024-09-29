@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { addContact, deleteContact, setFilter } from '../store/contactSlice';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
-import './App.module.css';
+// import { persistStore } from 'redux-persist';
 
 const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    return savedContacts ? JSON.parse(savedContacts) : [];
-  });
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.contacts.filter);
 
-const [filter, setFilter] = useState('');
+  useEffect(() => {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (savedContacts) {
+      savedContacts.forEach(contact => dispatch(addContact(contact)));
+    }
+  }, [dispatch]);
 
-useEffect(() => {
-  localStorage.setItem('contacts', JSON.stringify(contacts));
-}, [contacts]);
-
-  const addContact = (name, number) => {
+  const addNewContact = (name, number) => {
     const isDuplicate = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -32,15 +34,15 @@ useEffect(() => {
       number,
     };
 
-    setContacts(prevContacts => [...prevContacts, newContact]);
+    dispatch(addContact(newContact));
   };
 
-  const deleteContact = (id) => {
-      setContacts(prevContacts => prevContacts.filter(contact => contact.id !== id));
+  const handleDeleteContact = id => {
+    dispatch(deleteContact(id));
   };
 
   const handleFilterChange = event => {
-    setFilter( event.target.value );
+    dispatch(setFilter(event.target.value));
   };
 
   const getFilteredContacts = () => {
@@ -50,16 +52,16 @@ useEffect(() => {
     );
   };
 
-    const filteredContacts = getFilteredContacts();
+  const filteredContacts = getFilteredContacts();
 
-    return (
-      <div>
-        <ContactForm onAddContact={addContact} />
-        <h2>Contacts</h2>
-        <Filter filter={filter} onChange={handleFilterChange} />
-        <ContactList contacts={filteredContacts} onDelete={deleteContact} />
-      </div>
-    );
-  };
+  return (
+    <div>
+      <ContactForm onAddContact={addNewContact} />
+      <h2>Contacts</h2>
+      <Filter onChange={handleFilterChange} />
+      <ContactList contacts={filteredContacts} onDelete={handleDeleteContact} />
+    </div>
+  );
+};
 
 export default App;

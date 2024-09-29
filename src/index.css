@@ -13,6 +13,7 @@ body {
   /* background-color: grey; */
   background-image: url(/public/bodybackground.png);
   background-size: cover;
+  overflow: hidden;
 }
 
 

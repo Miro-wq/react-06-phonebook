@@ -6,7 +6,9 @@ import styles from './ContactListItem.module.css';
 const ContactListItem = ({ contact, onDelete }) => (
   <li>
     {contact.name}: {contact.number}
-    <button className={styles.deleteBtn} onClick={() => onDelete(contact.id)}>Delete</button>
+    <button className={styles.deleteBtn} onClick={onDelete}>
+      Delete
+    </button>
   </li>
 );
 
